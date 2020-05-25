@@ -1,0 +1,23 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems {
+    padding: 10px;
+    border-right-style: solid;
+    border-width: thin;
+    background-color: darkturquoise;
+
+}
+
+
+.messages {
+    padding: 10px;
+
+}
+
+.newMessage {
+    padding: 10px;
+}
+
