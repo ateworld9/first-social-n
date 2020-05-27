@@ -9,7 +9,7 @@ let Users = (props) => {
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
                 props.setUsers(response.data.items)
             })
-        };
+        }
     }
 
 
@@ -39,7 +39,7 @@ let Users = (props) => {
     </div>
 }
 
-export default Users;
+/*export default Users;*/
 
 
 /*

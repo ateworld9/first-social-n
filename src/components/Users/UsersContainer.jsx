@@ -1,5 +1,5 @@
 import React from "react";
-import Users from "./Users";
+import UsersClass from "./UsersClass";
 import {connect} from "react-redux";
 import {followActionCreator, setUserActionCreator} from "../../redux/users-reducer";
 import {unFollowActionCreator} from "../../redux/users-reducer";
@@ -32,6 +32,6 @@ let mapDispatchToProps= (dispatch) => {
 // запускается функция mapStateToProps(возвращает новый state)
 // после формируется новый объект, который сравнивается со старым объектом,но сравнивается не весь state, а только нужная этой компоненте часть (users)
 
-const UsersContainer = connect (mapStateToProps,mapDispatchToProps)(Users);
+const UsersContainer = connect (mapStateToProps,mapDispatchToProps)(UsersClass);
 
 export default UsersContainer;
