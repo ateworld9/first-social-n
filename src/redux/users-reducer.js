@@ -3,23 +3,15 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 
 let initialState = {
-    users: [
-        {id: 1, photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/George_Boole.jpg/274px-George_Boole.jpg' ,
-            followed:true, userName: 'Dmitriy', location: {countryName: 'Russia', cityName: 'Omsk'},userStatus:'i am a programmer'},
-        {id: 2, photoUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/George_Boole.jpg/274px-George_Boole.jpg' ,
-            followed:false, userName: 'Bull', location: {countryName: 'Russia', cityName: 'Omsk'},userStatus:'i am a programmer'},
-        {id: 3, photoUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/George_Boole.jpg/274px-George_Boole.jpg' ,
-            followed:true, userName: 'Novikov', location: {countryName: 'Russia', cityName: 'Omsk'},userStatus:'i am a programmer'},
-        {id: 4, photoUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/George_Boole.jpg/274px-George_Boole.jpg' ,
-            followed:false, userName: 'Ky39', location: {countryName: 'Russia', cityName: 'Omsk'},userStatus:'i am a programmer'},
-        {id: 5, photoUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/George_Boole.jpg/274px-George_Boole.jpg' ,
-            followed:true, userName: 'Timur', location: {countryName: 'Russia', cityName: 'Omsk'},userStatus:'i am a programmer'}
-    ]
+ users: []
 };
-
+// reducer -Чистая функция, которая принимает State и action, скорее всего модифицирует State, по правилу immutable (благодаря callback'ам)
+// И возвращает измененную копию State!!!!
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        //callback func
         case FOLLOW:
+            // так как нельзя изменять state  создаем его копию и возвращаем уже ее
             return {...state,
                     users: state.users.map( user => {
                         if (user.id === action.userId) {
@@ -27,14 +19,17 @@ const usersReducer = (state = initialState, action) => {
                         }
                         return user; })
             };
+        //callback func
         case UNFOLLOW:
+            // так как нельзя изменять state  создаем его копию и возвращаем уже ее
             return {...state,
                     users: state.users.map( user => {
                         if (user.id === action.userId){
                             return {...user, followed: false}
                         }
-                        return user; })
+                        return user;})
             };
+        //callback func
         case SET_USERS:
             return{...state, users: [...state.users, ...action.users]};
 
@@ -42,8 +37,10 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
+// Создает Action , который нужен редьюсеру, для определения того какую callback func вызвать
+// И передаёт параметр нужный callback'у
 export const followActionCreator = (userId) => ({type: FOLLOW, userId})
 export const unFollowActionCreator = (userId) => ({type: UNFOLLOW, userId})
-export const setUserActionCreator= (users) => ({type: SET_USERS})
+export const setUserActionCreator= (users) => ({type: SET_USERS, users})
 
 export default usersReducer;

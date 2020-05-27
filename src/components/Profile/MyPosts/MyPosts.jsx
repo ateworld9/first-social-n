@@ -16,7 +16,7 @@ const MyPosts = (props) => {
                               onChange={props.onPostChange}/>
                 </div>
                 <div>
-                    <button onClick={props.onAddPost}>Add Post</button>
+                    <button onClick={props.onAddPost}>Add Post</button>{/*props.onAddPost - отдаем кнопке callback*/}
                 </div>
             </div>
             <div className={classes.posts}>

@@ -16,16 +16,21 @@ let initialState = {
     ],
     newMessageText: ""
 }
-
+// reducer -Чистая функция, которая принимает State и action, скорее всего модифицирует State, по правилу immutable (благодаря callback'ам)
+// И возвращает измененную копию State!!!!
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        //callback
         case SEND_MESSAGE:
+            // так как нельзя изменять state создаем его копию и возвращаем уже ее
+            // если нужна только часть state создаем копию только этой части
             return {
                 ...state,
                 messages: [...state.messages, {messageText: state.newMessageText}],
                 newMessageText: ''
             };
+        //callback
         case UPDATE_NEW_MESSAGE_TEXT:
             return {
                 ...state,
@@ -35,7 +40,8 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-
+// Создает Action , который нужен редьюсеру, для определения того какую callback func вызвать
+// И передаёт параметр нужный callback'у
 export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
 
 export const updateNewMessageTextActionCreator = (text) => {

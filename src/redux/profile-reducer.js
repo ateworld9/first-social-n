@@ -11,18 +11,20 @@ let initialState = {
     newPostText: ""
 };
 
-
+// reducer -Чистая функция, которая принимает State и action, скорее всего модифицирует State, по правилу immutable (благодаря callback'ам)
+// И возвращает измененную копию State!!!!
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        //callback func
         case ADD_POST:
+            // так как нельзя изменять state  создаем его копию и возвращаем уже ее
             return {
                 ...state,
                 posts: [...state.posts, {id: 10, postText: state.newPostText, likeCounter: 0}],
                 newPostText: ''
             }
-
-
+        //callback func
         case UPDATE_NEW_POST_TEXT:
             return {
                 ...state,
@@ -33,7 +35,8 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-
+// Создает Action , который нужен редьюсеру, для определения того какую callback func вызвать
+// И передаёт параметр нужный callback'у
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextActionCreator = (text) => ({
     type: UPDATE_NEW_POST_TEXT,
