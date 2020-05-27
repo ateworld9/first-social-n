@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Users.module.css';
 import * as axios from 'axios';
-import userPhoto from '../../assets/images/avatar.jpg';
+import userPhoto from '../../assets/images/no_avatar.png';
 
 let Users = (props) => {
     let getUsers = () => {
@@ -9,7 +9,6 @@ let Users = (props) => {
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
                 props.setUsers(response.data.items)
             })
-
         };
     }
 
